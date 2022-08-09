@@ -9,7 +9,7 @@ export default function Context(props: any) {
     const [userObject, setUserObject] = useState<any>();
 
     useEffect(() => {
-        axios.get("https://jewel-slinger-backend.herokuapp.com/getuser", {withCredentials: true}).then((res: AxiosResponse) => {
+        axios.get("https://jewel-slinger-backend.herokuapp.com/auth/getuser", {withCredentials: true}).then((res: AxiosResponse) => {
             if (res.data){
                 setUserObject(res.data);
                 console.log(res.data, "<------ user object from context")
