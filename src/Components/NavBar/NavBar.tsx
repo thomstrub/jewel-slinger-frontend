@@ -10,7 +10,7 @@ export default function Navbar() {
 
     const logout = () => {
         console.log("logout click firing");
-        axios.get("http://localhost:4000/auth/logout", {
+        axios.get("https://jewel-slinger-backend.herokuapp.com/auth/logout", {
             withCredentials: true
     }).then((res: AxiosResponse)=> {
             console.log(res, "<------ response from logout")

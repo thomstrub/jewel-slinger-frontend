@@ -9,21 +9,21 @@ import LoginButton from "./LoginComponents/LoginButton";
 export default function LoginPage(){
 
     const googleLogin = () => {
-        window.open("http://localhost:4000/login/google", "_self");
+        window.open("https://jewel-slinger-backend.herokuapp.com/login/google", "_self");
         console.log("google firing<--------")
     }
 
     const instagramLogin = () => {
-        window.open("http://localhost:4000/login/instagram", "_self");
+        window.open("https://jewel-slinger-backend.herokuapp.com/login/instagram", "_self");
         console.log("instagram firing<--------")
     }
 
     const githubLogin = () => {
-        window.open("http://localhost:4000/login/github", "_self");
+        window.open("https://jewel-slinger-backend.herokuapp.com/login/github", "_self");
         console.log("github firing<--------")
     }
     const twitterLogin = () => {
-        window.open("http://localhost:4000/login/twitter", "_self");
+        window.open("https://jewel-slinger-backend.herokuapp.com/login/twitter", "_self");
         console.log("twitter firing<--------")
     }
 
