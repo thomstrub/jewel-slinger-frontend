@@ -25,6 +25,11 @@ export default function Navbar() {
             <ul className={styles.navBar}>
                 <li><Link to='/'>Home</Link></li>
                 {context ? 
+                <li><Link to='/jewels'>Jewels</Link></li>
+                :
+                null
+                }
+                {context ? 
                 <li onClick={logout}>Log Out</li>
                 :
                 <li><Link to='/login'>Login</Link></li>
