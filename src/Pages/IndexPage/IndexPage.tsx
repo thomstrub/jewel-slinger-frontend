@@ -1,4 +1,5 @@
 import React from 'react'
+import AddItemModal from '../../Components/AddItem/AddItemModal/AddItemModal';
 
 export default function IndexPage() {
 
@@ -8,7 +9,7 @@ export default function IndexPage() {
   return (
     <div>
         <p>This is where the item cards will list</p>
-        <button onClick={addItem}>add an item</button>
+        <AddItemModal />
     </div>
   )
 }
