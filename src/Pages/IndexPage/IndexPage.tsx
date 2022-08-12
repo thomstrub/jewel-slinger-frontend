@@ -1,5 +1,5 @@
 import axios, {AxiosResponse} from 'axios';
-import React, {useState, useEffect, ReactNode} from 'react'
+import React, {useState, useEffect} from 'react'
 import AddItemModal from '../../Components/AddItem/AddItemModal/AddItemModal';
 import { IItem, IMongoDBItem } from '../../types/maintypes';
 import ItemCard from '../../Components/ItemCard/ItemCard';
@@ -63,16 +63,11 @@ export default function IndexPage() {
        
     }
 
-  function addItem(){
-    console.log("item add firing");
-  }  
-
 
 
   return (
     <div>
         <div>
-            {/* {displayItems(items)} */}
             {
             items.map((item) => (
                 <ItemCard item={item}/>
