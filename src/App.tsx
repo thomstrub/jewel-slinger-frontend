@@ -22,10 +22,11 @@ function App() {
       {userObject ? null :
        <Route path='/login' element={<LoginPage />} />
       }
-     {userObject ? 
+     {/* {userObject ? 
        <Route path='/items' element={<IndexPage />} />:
        null
-      }
+      } */}
+      <Route path='/items' element={<IndexPage />} />
       {userObject ? 
        <Route path='/' element={<DetailPage/>} /> :
        null
