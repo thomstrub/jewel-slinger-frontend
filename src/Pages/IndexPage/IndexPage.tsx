@@ -26,7 +26,7 @@ export default function IndexPage() {
                 console.log(res.data, "<------ user object from context")
             }
         })
-    }, [])
+    }, [items, item]);
 
     async function submit(){
         console.log("form submit firing");
@@ -34,6 +34,7 @@ export default function IndexPage() {
         console.log(res, "<------ response from save");
     }
 
+    //dont pass in the whole event to the handler
     function handleItem(e: React.ChangeEvent<HTMLInputElement>): void{
         console.log(e.currentTarget, "<-------- current Target")
         let field = e.currentTarget.name;

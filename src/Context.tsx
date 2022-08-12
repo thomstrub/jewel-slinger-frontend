@@ -15,7 +15,7 @@ export default function Context(props: any) {
                 console.log(res.data, "<------ user object from context")
             }
         })
-    }, [])
+    }, [userObject])
   return (
     <div>
         <myContext.Provider value={userObject}>{props.children}</myContext.Provider>
