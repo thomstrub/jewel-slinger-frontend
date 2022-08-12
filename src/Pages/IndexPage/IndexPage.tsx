@@ -7,7 +7,7 @@ import ItemCard from '../../Components/ItemCard/ItemCard';
 interface IMongoDBItems extends Array<IMongoDBItem>{};
 
 export default function IndexPage() {
-
+    const [loading, setLoading] = useState<boolean>(true)
     const [items, setItems] = useState<IMongoDBItems>([]);
 
     const [item,setItem] = useState<IItem>({
@@ -20,13 +20,19 @@ export default function IndexPage() {
     })
 
     useEffect(() => {
-        axios.get("https://jewel-slinger-backend.herokuapp.com/items", {withCredentials: true}).then((res: AxiosResponse) => {
+        fetchItems();
+    }, [items, item]);
+
+    async function fetchItems(){
+        await axios.get("https://jewel-slinger-backend.herokuapp.com/items", {withCredentials: true}).then( (res: AxiosResponse) => {
+            console.log(res, " <------- response from server");
             if (res.data){
                 setItems(res.data.items);
                 console.log(res.data, "<------ user object from context")
+                setLoading(false);
             }
         })
-    }, [items, item]);
+    }
 
     async function submit(){
         console.log("form submit firing");
