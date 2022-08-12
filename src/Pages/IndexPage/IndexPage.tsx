@@ -32,7 +32,7 @@ export default function IndexPage() {
                 setLoading(false);
             }
         })
-    }
+    } 
 
     async function submit(){
         console.log("form submit firing");
