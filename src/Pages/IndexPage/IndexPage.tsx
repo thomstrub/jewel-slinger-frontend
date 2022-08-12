@@ -1,16 +1,15 @@
-import axios from 'axios';
-import React, {useState} from 'react'
+import axios, {AxiosResponse} from 'axios';
+import React, {useState, useEffect, ReactNode} from 'react'
 import AddItemModal from '../../Components/AddItem/AddItemModal/AddItemModal';
-import { IItem } from '../../types/maintypes';
+import { IItem, IMongoDBItem } from '../../types/maintypes';
+import ItemCard from '../../Components/ItemCard/ItemCard';
 
+interface IMongoDBItems extends Array<IMongoDBItem>{};
 
 export default function IndexPage() {
 
-   async function submit(){
-        console.log("form submit firing");
-        const res = await axios.post('https://jewel-slinger-backend.herokuapp.com/items', item, {withCredentials: true});
-        console.log(res, "<------ response from save");
-    }
+    const [items, setItems] = useState<IMongoDBItems>([]);
+
     const [item,setItem] = useState<IItem>({
         name: '',
         price: '',
@@ -19,6 +18,21 @@ export default function IndexPage() {
         description: '',
         size: ''
     })
+
+    useEffect(() => {
+        axios.get("https://jewel-slinger-backend.herokuapp.com/items", {withCredentials: true}).then((res: AxiosResponse) => {
+            if (res.data){
+                setItems(res.data.items);
+                console.log(res.data, "<------ user object from context")
+            }
+        })
+    }, [])
+
+    async function submit(){
+        console.log("form submit firing");
+        const res = await axios.post('https://jewel-slinger-backend.herokuapp.com/items', item, {withCredentials: true});
+        console.log(res, "<------ response from save");
+    }
 
     function handleItem(e: React.ChangeEvent<HTMLInputElement>): void{
         console.log(e.currentTarget, "<-------- current Target")
@@ -52,8 +66,19 @@ export default function IndexPage() {
   function addItem(){
     console.log("item add firing");
   }  
+
+
+
   return (
     <div>
+        <div>
+            {/* {displayItems(items)} */}
+            {
+            items.map((item) => (
+                <ItemCard item={item}/>
+            ))
+            }
+        </div>
         <p>This is where the item cards will list</p>
         <AddItemModal item={item} handleItem={handleItem} submit={submit}/>
     </div>
