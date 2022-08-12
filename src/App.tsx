@@ -23,15 +23,13 @@ function App() {
        <Route path='/login' element={<LoginPage />} />
       }
      {userObject ? 
-       <Route path='/jewels' element={<IndexPage />} />:
+       <Route path='/items' element={<IndexPage />} />:
        null
       }
       {userObject ? 
-       <Route path='/singlejewel' element={<DetailPage/>} /> :
+       <Route path='/' element={<DetailPage/>} /> :
        null
       }
-      {/* <Route path='/jewels' element={<IndexPage />} />
-      <Route path='/singlejewel' element={<IndexPage />} /> */}
     </Routes>
     </BrowserRouter>
   );
