@@ -21,23 +21,26 @@ export default function IndexPage() {
 
     useEffect(() => {
         fetchItems();
-    }, [items, item]);
+    }, []);
 
     async function fetchItems(){
-        await axios.get("https://jewel-slinger-backend.herokuapp.com/items", {withCredentials: true}).then( (res: AxiosResponse) => {
-            console.log(res, " <------- response from server");
-            if (res.data){
-                setItems(res.data.items);
-                console.log(res.data, "<------ user object from context")
-                setLoading(false);
-            }
+        try{
+            await axios.get("https://jewel-slinger-backend.herokuapp.com/items", {withCredentials: true}).then( (res: AxiosResponse) => {            
+            setItems([...res.data.items]);
+            console.log(res.data, "<------ items from fetch items")
+            setLoading(false);
         })
+        } catch(err: unknown){
+            console.log(err, " <--- error from fetchItems");
+        }
+        
     } 
 
     async function submit(){
         console.log("form submit firing");
         const res = await axios.post('https://jewel-slinger-backend.herokuapp.com/items', item, {withCredentials: true});
         console.log(res, "<------ response from save");
+        setItems([...items, res.data.post]);
     }
 
     //dont pass in the whole event to the handler
@@ -72,7 +75,11 @@ export default function IndexPage() {
 
 
 
-  return (
+  
+   return loading ?
+         ( <div>Loading</div>)
+    :
+     (
     <div>
         <div>
             {
@@ -84,5 +91,7 @@ export default function IndexPage() {
         <p>This is where the item cards will list</p>
         <AddItemModal item={item} handleItem={handleItem} submit={submit}/>
     </div>
+    
+    
   )
 }
