@@ -3,6 +3,7 @@ import React, {useState, useEffect} from 'react'
 import AddItemModal from '../../Components/AddItem/AddItemModal/AddItemModal';
 import { IItem, IMongoDBItem } from '../../types/maintypes';
 import ItemCard from '../../Components/ItemCard/ItemCard';
+import Layout from '../../Components/Layout/Layout';
 
 interface IMongoDBItems extends Array<IMongoDBItem>{};
 
@@ -27,7 +28,7 @@ export default function IndexPage() {
 
     async function fetchItems(){
         try{
-            await axios.get("https://jewel-slinger-backend.herokuapp.com/items", {withCredentials: true}).then( (res: AxiosResponse) => {            
+            await axiosClient.get('').then( (res: AxiosResponse) => {            
             setItems([...res.data.items]);
             console.log(res.data, "<------ items from fetch items")
             setLoading(false);
@@ -102,13 +103,17 @@ export default function IndexPage() {
      (
     <div>
         <div>
+            <Layout>
             {
             items.map((item) => (
                 <ItemCard item={item} handleDelete={handleDelete}/>
             ))
             }
+            </Layout>
         </div>
+
         <p>This is where the item cards will list</p>
+        
         <AddItemModal item={item} handleItem={handleItem} submit={submit}/>
     </div>
     
