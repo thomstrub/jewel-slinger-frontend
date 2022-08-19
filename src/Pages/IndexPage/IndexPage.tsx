@@ -37,7 +37,7 @@ export default function IndexPage() {
             
         } 
         fetchItems();
-    }, [items]);
+    }, []);
 
 
     async function submit(){
