@@ -27,7 +27,7 @@ export default function IndexPage() {
 
     async function fetchItems(){
         try{
-            await axios.get("https://jewel-slinger-backend.herokuapp.com/items", {withCredentials: true}).then( (res: AxiosResponse) => {            
+            await axiosClient.get('').then( (res: AxiosResponse) => {            
             setItems([...res.data.items]);
             console.log(res.data, "<------ items from fetch items")
             setLoading(false);
