@@ -7,7 +7,7 @@ export interface IUser{
     _id: string;
 }
 
-export interface IItem {
+export type IItem = {
     name: string,
     price?: string,
     quantity?: number,

@@ -47,32 +47,22 @@ export default function IndexPage() {
         setItems([...items, res.data.post]);
     }
 
+    function populateItem(currentItem:string, currentValue:(string)): void {
+        if(Object.keys(item).includes(currentItem)){
+            setItem({...item, [currentItem]: currentValue});
+        }
+    }
+
     //dont pass in the whole event to the handler
     function handleItem(e: React.ChangeEvent<HTMLInputElement>): void{
         console.log(e.currentTarget, "<-------- current Target")
         let field = e.currentTarget.name;
-        switch(field){
-            case 'name':
-                setItem({...item, name: e.currentTarget.value});
-                break;
-            case 'price':
-                setItem({...item, price: e.currentTarget.value});
-                break;
-            case 'quantity':
-                setItem({...item, quantity: e.currentTarget.value as unknown as number});
-                break;
-            case 'photo':
-                setItem({...item, photo: e.currentTarget.value});
-                break;            
-            case 'size':
-                setItem({...item, size: e.currentTarget.value});
-                break;
-            case 'description':
-                setItem({...item, description: e.currentTarget.value});
-                break;
-            default:
-                console.log('form field name not found');
-                break;
+        if(field === 'quantity'){     
+            setItem({...item, quantity: e.target.value as unknown as number})
+        } else if(field.length) {
+            populateItem(field, e.currentTarget.value);
+        } else {
+            throw Error('Form control error.');
         }
        
     }
