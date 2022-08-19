@@ -10,6 +10,8 @@ interface IMongoDBItems extends Array<IMongoDBItem>{};
 export default function IndexPage() {
     const [loading, setLoading] = useState<boolean>(true)
     const [items, setItems] = useState<IMongoDBItems>([]);
+    const axiosClient = axios.create({baseURL: "https://jewel-slinger-backend.herokuapp.com/items", withCredentials: true});
+
 
     const [item,setItem] = useState<IItem>({
         name: '',
@@ -21,23 +23,21 @@ export default function IndexPage() {
     })
 
     useEffect(() => {
+        async function fetchItems(){
+            try{
+                await axiosClient.get('').then( (res: AxiosResponse) => {            
+                setItems([...res.data.items]);
+                console.log(res.data, "<------ items from fetch items")
+                setLoading(false);
+            })
+            } catch(err: unknown){
+                console.log(err, " <--- error from fetchItems");
+            }
+            
+        } 
         fetchItems();
-    }, []);
+    }, [items]);
 
-    const axiosClient = axios.create({baseURL: "https://jewel-slinger-backend.herokuapp.com/items", withCredentials: true});
-
-    async function fetchItems(){
-        try{
-            await axiosClient.get('').then( (res: AxiosResponse) => {            
-            setItems([...res.data.items]);
-            console.log(res.data, "<------ items from fetch items")
-            setLoading(false);
-        })
-        } catch(err: unknown){
-            console.log(err, " <--- error from fetchItems");
-        }
-        
-    } 
 
     async function submit(){
         console.log("form submit firing");

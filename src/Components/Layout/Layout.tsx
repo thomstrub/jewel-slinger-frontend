@@ -1,4 +1,4 @@
-import React, { Children } from 'react';
+import React from 'react';
 import {Row, Container} from 'react-bootstrap';
 
 export default function Layout(props: React.PropsWithChildren) {
