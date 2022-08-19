@@ -23,5 +23,6 @@ export interface IMongoDBItem {
     photo?: string,
     description?: string,
     size?: string,
+    _id: string,
     _v: number
 }

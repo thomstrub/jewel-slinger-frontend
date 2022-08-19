@@ -23,6 +23,8 @@ export default function IndexPage() {
         fetchItems();
     }, []);
 
+    const axiosClient = axios.create({baseURL: "https://jewel-slinger-backend.herokuapp.com/items", withCredentials: true});
+
     async function fetchItems(){
         try{
             await axios.get("https://jewel-slinger-backend.herokuapp.com/items", {withCredentials: true}).then( (res: AxiosResponse) => {            
@@ -73,6 +75,24 @@ export default function IndexPage() {
        
     }
 
+    async function handleDelete(e: any){
+        e.preventDefault();
+        const item = e.target.getAttribute("name");
+        console.log(item, " <------ item from handleDelete")
+        await deleteItem(item);
+        setItems(items.filter(stateItem => stateItem._id !== item));
+
+    }
+
+    async function deleteItem(itemId: string){
+        try{
+            const response = await axiosClient.delete(itemId);
+            console.log(response);
+
+        } catch(err: unknown){
+            console.log(err);
+        }
+    }
 
 
   
@@ -84,7 +104,7 @@ export default function IndexPage() {
         <div>
             {
             items.map((item) => (
-                <ItemCard item={item}/>
+                <ItemCard item={item} handleDelete={handleDelete}/>
             ))
             }
         </div>
