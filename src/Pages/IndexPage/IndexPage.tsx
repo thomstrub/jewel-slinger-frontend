@@ -105,17 +105,17 @@ export default function IndexPage() {
     <div>
         <div>
             <Layout>
-            {
-            items.map((item) => (
-                <ItemCard item={item} handleDelete={handleDelete}/>
-            ))
-            }
+                {
+                items.map((item) => (
+                    <ItemCard item={item} handleDelete={handleDelete}/>
+                ))
+                }
+                <p>This is where the item cards will list</p>
+                
+                <AddItemModal item={item} handleItem={handleItem} submit={submit}/>
             </Layout>
         </div>
 
-        <p>This is where the item cards will list</p>
-        
-        <AddItemModal item={item} handleItem={handleItem} submit={submit}/>
     </div>
     
     
