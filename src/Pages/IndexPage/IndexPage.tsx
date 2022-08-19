@@ -23,6 +23,7 @@ export default function IndexPage() {
     })
 
     useEffect(() => {
+        const axiosClient = axios.create({baseURL: "https://jewel-slinger-backend.herokuapp.com/items", withCredentials: true});
         async function fetchItems(){
             try{
                 await axiosClient.get('').then( (res: AxiosResponse) => {            
