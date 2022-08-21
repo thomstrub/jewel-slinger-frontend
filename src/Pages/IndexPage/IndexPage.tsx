@@ -47,22 +47,28 @@ export default function IndexPage() {
         setItems([...items, res.data.post]);
     }
 
-    function populateItem(currentItem:string, currentValue:(string)): void {
-        if(Object.keys(item).includes(currentItem)){
+    function populateStringItem(currentItem:string, currentValue:(string)): void {
+            setItem({...item, [currentItem]: currentValue});  
+    }
+
+    function populateNumericItem(currentItem:string, currentValue:number): void {
             setItem({...item, [currentItem]: currentValue});
-        }
     }
 
     //dont pass in the whole event to the handler
     function handleItem(e: React.ChangeEvent<HTMLInputElement>): void{
         console.log(e.currentTarget, "<-------- current Target")
         let field = e.currentTarget.name;
-        if(field === 'quantity'){     
-            setItem({...item, quantity: e.target.value as unknown as number})
-        } else if(field.length) {
-            populateItem(field, e.currentTarget.value);
+        if(Object.keys(item).includes(field)){
+            if (typeof e.currentTarget.value === 'number'){
+                populateNumericItem(field, e.currentTarget.value);
+            } else if(typeof e.currentTarget.value === 'string') {
+                populateStringItem(field, e.currentTarget.value);
+            } else {
+                throw Error('Form control error.');
+            }
         } else {
-            throw Error('Form control error.');
+            throw Error('Form Control Error');
         }
        
     }
